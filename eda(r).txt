@@ -1,0 +1,26 @@
+# 🧹 Load dataset
+data(mtcars)
+df <- mtcars
+
+# 📌 View first few rows
+head(df)
+
+# 🔍 Check for NA values
+sum(is.na(df))         # Total NA count
+colSums(is.na(df))     # NA per column
+
+# 📊 Summary statistics
+summary(df)
+
+# 📈 Plot relationships (scatterplot matrix)
+pairs(df, main = "Scatterplot Matrix of mtcars")
+
+# 📉 Histogram - distribution of 'mpg' (Miles per Gallon)
+hist(df$mpg, col = "skyblue", main = "Histogram of MPG", xlab = "Miles per Gallon")
+
+# 📦 Boxplot - to check outliers in 'hp' (Horsepower)
+boxplot(df$hp, main = "Boxplot of Horsepower", col = "tomato", ylab = "Horsepower")
+
+# 📦 Boxplot by category - Horsepower by number of gears
+boxplot(hp ~ gear, data = df, col = c("lightgreen", "lightblue", "salmon"),
+        main = "Horsepower by Number of Gears", xlab = "Gears", ylab = "Horsepower")
