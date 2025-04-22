@@ -1,0 +1,38 @@
+# Load required libraries
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+# Import data (Iris dataset)
+data <- read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+
+# Check for missing values
+sum(is.na(data))
+
+# View column names and structure
+str(data)
+
+# Rename columns (if needed)
+colnames(data) <- gsub("\\.", "_", colnames(data))
+
+summary(data)
+
+# Mean petal length by species
+data %>%
+  group_by(species) %>%
+  summarise(mean_petal_length = mean(petal_length))
+
+# Histogram of Sepal Length
+ggplot(data, aes(x = sepal_length)) +
+  geom_histogram(fill = "skyblue", bins = 20) +
+  labs(title = "Distribution of Sepal Length")
+
+# Scatter Plot - Sepal Dimensions
+ggplot(data, aes(x = sepal_length, y = sepal_width, color = species)) +
+  geom_point(size = 2) +
+  labs(title = "Sepal Length vs Sepal Width")
+
+# Boxplot - Petal Length by Species
+ggplot(data, aes(x = species, y = petal_length, fill = species)) +
+  geom_boxplot() +
+  labs(title = "Petal Length by Species")
