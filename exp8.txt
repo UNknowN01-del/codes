@@ -1,0 +1,27 @@
+# Load required libraries
+library(readr)
+library(ggplot2)
+library(corrplot)
+
+# Load sample data (Iris dataset)
+data <- read_csv("https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv")
+
+# Scatter plot: Sepal Length vs Sepal Width
+ggplot(data, aes(x = sepal_length, y = sepal_width, color = species)) +
+  geom_point(size = 2) +
+  labs(title = "Sepal Length vs Sepal Width")
+
+# Scatter plot: Petal Length vs Petal Width
+ggplot(data, aes(x = petal_length, y = petal_width, color = species)) +
+  geom_point(size = 2) +
+  labs(title = "Petal Length vs Petal Width")
+
+# Correlation Analysis
+numeric_data <- data[, sapply(data, is.numeric)]
+
+# Compute correlation matrix
+cor_matrix <- cor(numeric_data)
+
+# Plot correlation matrix
+corrplot(cor_matrix, method = "circle", type = "upper",
+         title = "Correlation Matrix", tl.col = "black", addCoef.col = "black")
